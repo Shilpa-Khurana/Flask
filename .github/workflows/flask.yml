@@ -1,0 +1,44 @@
+---
+name: mycicd
+
+on:
+  push:
+    branches:
+      - master
+
+jobs: 
+  pullcicd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: workflow started
+        run: echo "Workflow started"
+
+      - name: ssh into server
+        run: | 
+          echo "This step will always run"
+        
+      - name: checkout
+        uses: actions/checkout@v2
+        
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          cat SSH_KEY > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host staging
+            HostName "43.205.255.238"
+            User cicd
+            IdentityFile ~/.ssh/staging.key
+            StrictHostKeyChecking no
+          END
+      
+      - name: Running 
+        run: ssh staging 'echo $USER'
+
+      - name: Running gitpull
+        run: ssh staging 'bash /var/www/cicd.sh'
+
+      - name: workflow completed
+        run: echo "check server output" 
+
