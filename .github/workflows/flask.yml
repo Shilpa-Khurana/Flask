@@ -16,7 +16,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-       - name: Building docker image
+      - name: Building docker image
         run: docker build -t flaskrun . 
        
       - name: ls docker image
