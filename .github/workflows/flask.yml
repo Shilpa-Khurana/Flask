@@ -12,8 +12,11 @@ jobs:
     steps:
       - name: workflow started
         run: echo "Workflow started"
-       
-      - name: Building docker image
+
+      - name: checkout
+        uses: actions/checkout@v2
+
+       - name: Building docker image
         run: docker build -t flaskrun . 
        
       - name: ls docker image
@@ -22,9 +25,6 @@ jobs:
       - name: ssh into server
         run: | 
           echo "This step will always run"
-        
-      - name: checkout
-        uses: actions/checkout@v2
         
       - name: Configure SSH
         run: |
