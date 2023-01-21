@@ -12,7 +12,13 @@ jobs:
     steps:
       - name: workflow started
         run: echo "Workflow started"
-
+       
+      - name: Building docker image
+        run: docker build -t flaskrun . 
+       
+      - name: ls docker image
+        run: docker images
+      
       - name: ssh into server
         run: | 
           echo "This step will always run"
