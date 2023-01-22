@@ -21,7 +21,14 @@ jobs:
        
       - name: ls docker image
         run: docker images
-      
+     
+      - name: login into dockerhub
+        env:
+          DOCKER_USERNAME: ${{shilpakhurana}} 
+          DOCKER_PASSWORD: ${{Shilpa@0190}}
+        run: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
       - name: ssh into server
         run: | 
           echo "This step will always run"
