@@ -29,9 +29,11 @@ jobs:
         run: |
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       
-      - name: docker push
+      - name: docker tag change
         run: docker tag flaskrun:latest flaskrun2:latest2
-             docker push shilpakhurana/flask-repo:latest2
+             
+      - name: docker push
+        run:  docker push shilpakhurana/flask-repo:latest2
 
       - name: ssh into server
         run: | 
