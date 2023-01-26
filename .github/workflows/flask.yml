@@ -46,8 +46,8 @@ jobs:
           chmod 600 ~/.ssh/staging.key
           cat >>~/.ssh/config <<END
           Host staging
-            HostName "43.205.255.238"
-            User cicd
+            HostName "3.109.120.217"
+            User ubuntu
             IdentityFile ~/.ssh/staging.key
             StrictHostKeyChecking no
           END
@@ -56,7 +56,7 @@ jobs:
         run: ssh staging 'echo $USER'
 
       - name: Running gitpull
-        run: ssh staging 'bash /var/www/cicd.sh'
+        run: ssh staging 'bash /home/ubuntu/cicd.sh'
 
       - name: workflow completed
         run: echo "check server output" 
